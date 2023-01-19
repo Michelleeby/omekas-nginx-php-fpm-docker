@@ -1,0 +1,49 @@
+services:
+  server: 
+    build: 
+      dockerfile: ./utils/server.Dockerfile
+    restart: always
+    volumes:
+      - ./config/nginx.app.conf:/etc/nginx/conf.d/omekas.conf
+    ports:
+      - 80:80
+    networks:
+      - frontend
+
+  app:
+    build: 
+      dockerfile: ./utils/app.Dockerfile
+    restart: always
+    volumes:
+      - ./db:/var/lib/mysql
+      - ./app:/usr/share/nginx/omekas
+      - ./src/themes:/usr/share/nginx/omekas/themes
+      - ./src/modules:/usr/share/nginx/omekas/modules
+      - ./src/files:/usr/share/nginx/omekas/files
+      - ./config/omekas-db.ini:/usr/share/nginx/omekas/config/database.ini
+      - ./config/omekas.config.php:/usr/share/nginx/omekas/local.config.php
+      - ./config/php-fpm.conf:/usr/local/etc/php-fpm.d/omekas.conf
+    ports:
+      - 9000:9000
+    networks:
+      - frontend
+      - backend
+
+  db:
+    image: mariadb:latest
+    restart: always
+    volumes:
+      - ./db:/var/lib/mysql
+    ports: 
+      - 3306:3306
+    networks:
+      - backend
+    environment: 
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+  
+networks:
+  frontend: {}
+  backend: {}

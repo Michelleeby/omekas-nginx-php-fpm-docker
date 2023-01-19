@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+__construct() {
+    declare -grA CLI=(
+        [env]=$1/environment
+        [commands]=$1/commands
+    )
+
+    for key val in ${(kv)CLI}; do
+        if source $val; then
+            printf "✅ Sourced $COLOR[orange]%s$COLOR[reset] from $COLOR[orange]%s$COLOR[reset] \n" $key $val
+        fi
+    done
+
+    printf "\n✅ Sources loaded. Run $COLOR[yellow]'cli.info'$COLOR[reset] for help. \n"
+}
+
+__construct $1

@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+__construct() {
+    declare -grA ROUTE=(
+        [modules]=./src/modules
+        [themes]=./src/themes
+        [files]=./src/files
+        [db]=./src/db
+        [cli]=./utils/cli
+        [commands]=./utils/cli/commands
+        [docs]=./utils/cli/docs
+    )
+
+    declare -grA COLOR=(
+        [maroon]="\033[38;5;1m"
+        [red]="\033[38;5;9m"
+        [orange]="\033[38;5;202m"
+        [yellow]="\033[38;5;11m"
+        [green]="\033[38;5;10m"
+        [aqua]="\033[38;5;14m"
+        [blue]="\033[38;5;12m"
+        [purple]="\033[38;5;13m"
+        [fuchsia]="\033[38;5;198m"
+        [pink]="\033[38;5;198m"
+        [white]="\033[38;5;15m"
+        [gray]="\033[38;5;8m"
+        [reset]="\033[0m"
+    )
+
+    declare -grA SPACING=(
+        [single]="\n"
+        [double]="\n\n"
+    )
+
+    return true
+}
+
+__construct

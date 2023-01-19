@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+__construct() {
+    return true
+}
+
+__info() {
+    ###
+    # awk BODY
+    ###
+    awk \
+    -v maroon=$COLOR[maroon] \
+    -v purple=$COLOR[purple] \
+    -v grey=$COLOR[gray] \
+    -v red=$COLOR[red] \
+    -v fuchsia=$COLOR[fuchsia] \
+    -v aqua=$COLOR[aqua] \
+    -v white=$COLOR[white] \
+    '\
+    /@name/ \
+    {
+        print "\n" red $3, grey substr($0, index($0, $4))
+    }
+    /@arg/ \
+    {
+        print maroon $2, aqua $3, red $4, aqua $5,
+        fuchsia substr($6, 1, 1) purple substr($6, 2, 2),
+        white $7, grey substr($0, index($0, $8))
+    }
+    /@returns/ \
+    {
+        print maroon $2, grey substr($0, index($0, $3)),
+        "\n"
+    }' \
+    $ROUTE[commands]
+}
+
+__construct

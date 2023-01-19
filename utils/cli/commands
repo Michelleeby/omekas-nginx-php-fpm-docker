@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# @name cli.info Prints the available CLI commands and their documentation.
+# @returns Nothing. Prints to terminal output.
+cli.info() {
+    source $ROUTE[docs]
+    __info
+}
