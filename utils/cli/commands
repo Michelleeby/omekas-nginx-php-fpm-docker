@@ -5,20 +5,36 @@ __construct() {
     return true
 }
 
-# @name cli.info Prints the available CLI commands and their documentation.
+# @name info Prints a specific dependency's commands and docs, or all of the commands available if no key is given.
+# @arg { string } $1 key Optional. The name of the depenedency to print the documentation for.
 # @returns 0.
-cli.info() {
-    for key val in ${(kv)DEPS}; do
-        case $key in
-            (docs | env) continue ;;
-            (commands | git) 
-                __info $val 
-                continue
-                ;;
-            (*) continue ;;
-        esac
-    done
+info() {
+    if [ ! -z "${1[@]}" ]; then
+        __info $DEPS[$1]
+        return 0
+    else
+        for key val in ${(kv)DEPS}; do
+            case $key in
+                (docs) continue ;;
+                (env | commands | git) 
+                    __info $val 
+                    continue
+                    ;;
+                (*) continue ;;
+            esac
+        done
+    fi
     
+    return 0
+}
+
+# @name deps Prints the list of dependencies.
+# @returns 0.
+deps() {
+    for key in ${(k)DEPS}; do
+        printf "$COLOR[orange]%s$COLOR[reset] \n" $key
+    done
+
     return 0
 }
 

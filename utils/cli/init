@@ -14,7 +14,7 @@ __construct() {
         fi
     done
 
-    printf "\n✅ Sources loaded. Run $COLOR[yellow]'cli.info'$COLOR[reset] for help. \n"
+    printf "\n✅ Sources loaded. Run $COLOR[yellow]'info'$COLOR[reset] for help. \n"
 
     return 0
 }

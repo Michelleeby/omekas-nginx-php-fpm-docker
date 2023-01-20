@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 
 __construct() {
+    # @name ROUTE Contains the paths to the various directories.
+    # @arg { string } $1 src The path to the src directory.
+    # @arg { string } $2 modules The path to the modules directory.
+    # @arg { string } $3 themes The path to the themes directory.
+    # @arg { string } $4 files The path to the files directory.
+    # @arg { string } $5 db The path to the db directory.
+    # @arg { string } $6 cli The path to the cli directory.
+    # @returns A readonly associative array.
     declare -grA ROUTE=(
         [src]=./src
         [modules]=$ROUTE[src]/modules
@@ -10,6 +18,21 @@ __construct() {
         [cli]=./utils/cli
     )
 
+    # @name COLOR Contains the ANSI escape codes for the various colors.
+    # @arg { string } $1 maroon The ANSI escape code for maroon.
+    # @arg { string } $2 red The ANSI escape code for red.
+    # @arg { string } $3 orange The ANSI escape code for orange.
+    # @arg { string } $4 yellow The ANSI escape code for yellow.
+    # @arg { string } $5 green The ANSI escape code for green.
+    # @arg { string } $6 aqua The ANSI escape code for aqua.
+    # @arg { string } $7 blue The ANSI escape code for blue.
+    # @arg { string } $8 purple The ANSI escape code for purple.
+    # @arg { string } $9 fuchsia The ANSI escape code for fuchsia.
+    # @arg { string } $10 pink The ANSI escape code for pink.
+    # @arg { string } $11 white The ANSI escape code for white.
+    # @arg { string } $12 gray The ANSI escape code for gray.
+    # @arg { string } $13 reset The ANSI escape code for reset.
+    # @returns A readonly associative array.
     declare -grA COLOR=(
         [maroon]="\033[38;5;1m"
         [red]="\033[38;5;9m"
@@ -26,6 +49,10 @@ __construct() {
         [reset]="\033[0m"
     )
 
+    # @name SPACING Contains the ANSI escape codes for the various spacing.
+    # @arg { string } $1 single The ANSI escape code for single spacing.
+    # @arg { string } $2 double The ANSI escape code for double spacing.
+    # @returns A readonly associative array.
     declare -grA SPACING=(
         [single]="\n"
         [double]="\n\n"
