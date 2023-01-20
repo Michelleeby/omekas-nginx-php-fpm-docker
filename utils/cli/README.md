@@ -41,7 +41,7 @@ Feeling like you have a bunch of similar functions to group? Break them out into
 
 The `awk` script that controls how the commands documation is printed to output.
 
-### [Enironment](https://github.com/Michelleeby/omekas-nginx-php-fpm-docker/blob/main/utils/cli/environment)
+### [Environment](https://github.com/Michelleeby/omekas-nginx-php-fpm-docker/blob/main/utils/cli/environment)
 
 Set the CLI environment variables here. `$ROUTE` holds app paths, and `$COLOR` and `$SPACING` can help with `awk` or general string formatting. Anything set here will be available once the CLI is initialized.
 
