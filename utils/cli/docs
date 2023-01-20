@@ -32,7 +32,9 @@ __info() {
         print maroon $2, grey substr($0, index($0, $3)),
         "\n"
     }' \
-    $ROUTE[commands]
+    $@
+
+    return 0
 }
 
 __construct

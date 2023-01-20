@@ -1,0 +1,159 @@
+#!/usr/bin/env bash
+
+__construct() {
+    return true
+}
+
+# @name whichbranch Prints the current branch name.
+# @returns 0.
+whichbranch() {
+    git branch | grep \* | cut -d ' ' -f2
+    return 0
+}
+
+# @name branches Prints the list of branches.
+# @returns 0.
+branches() {
+    git branch
+    return 0
+}
+
+# @name checkout Switches to the specified branch.
+# @arg { string } $1 branch The name of the branch to switch to.
+# @returns 0.
+checkout() {
+    git checkout $1
+    return 0
+}
+
+# @name newbranch Creates a new branch and switches to it.
+# @arg { string } $1 branch The name of the branch to create.
+# @returns 0. 
+newbranch() {
+    git checkout -b $1
+    return 0
+}
+
+# @name deletebranch Deletes the specified branch.
+# @arg { string } $1 branch The name of the branch to delete.
+# @returns 0.
+deletebranch() {
+    git branch -d $1
+    return 0
+}
+
+# @name commit Adds and commits the staged changes.
+# @arg { string } $1 message The commit message.
+# @returns 0.
+commit() {
+    git commit -m "$1"
+    return 0
+}
+
+# @name add Adds the specified files to the staging area.
+# @arg { string } $1 files The files to add.
+# @returns 0.
+add() {
+    git add $1
+    return 0
+}
+
+# @name status Prints the status of the working tree.
+# @returns 0.
+status() {
+    git status
+    return 0
+}
+
+# @name push Pushes the current branch to the remote.
+# @returns 0.
+push() {
+    git push
+    return 0
+}
+
+# @name pull Pulls the latest changes from the remote.
+# @returns 0.
+pull() {
+    git pull
+    return 0
+}
+
+# @name merge Merges the specified branch into the current branch.
+# @arg { string } $1 branch The name of the branch to merge.
+# @returns 0.
+merge() {
+    git merge $1
+    return 0
+}
+
+# @name rebase Rebase the current branch onto the specified branch.
+# @arg { string } $1 branch The name of the branch to rebase onto.
+# @returns 0.
+rebase() {
+    git rebase $1
+    return 0
+}
+
+# @name stash Stashes the current changes.
+# @returns 0.
+stash() {
+    git stash
+    return 0
+}
+
+# @name stashpop Pops the latest stash.
+# @returns 0.
+stashpop() {
+    git stash pop
+    return 0
+}
+
+# @name stashlist Lists the stashes.
+# @returns 0.
+stashlist() {
+    git stash list
+    return 0
+}
+
+# @name stashclear Clears the stashes.
+# @returns 0.
+stashclear() {
+    git stash clear
+    return 0
+}
+
+# @name stashapply Applies the specified stash.
+# @arg { string } $1 stash The name of the stash to apply.
+# @returns 0.
+stashapply() {
+    git stash apply $1
+    return 0
+}
+
+# @name stashdrop Drops the specified stash.
+# @arg { string } $1 stash The name of the stash to drop.
+# @returns 0.
+stashdrop() {
+    git stash drop $1
+    return 0
+}
+
+# @name stashshow Shows the specified stash.
+# @arg { string } $1 stash The name of the stash to show.
+# @returns 0.
+stashshow() {
+    git stash show $1
+    return 0
+}
+
+# @name stashbranch Creates a new branch from the specified stash.
+# @arg { string } $1 stash The name of the stash to create the branch from.
+# @arg { string } $2 branch The name of the branch to create.
+# @returns 0.
+stashbranch() {
+    git stash branch $1 $2
+    return 0
+}
+
+__construct

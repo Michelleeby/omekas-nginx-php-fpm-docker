@@ -1,8 +1,25 @@
 #!/usr/bin/env bash
 
-# @name cli.info Prints the available CLI commands and their documentation.
-# @returns Nothing. Prints to terminal output.
-cli.info() {
-    source $ROUTE[docs]
-    __info
+
+__construct() {
+    return true
 }
+
+# @name cli.info Prints the available CLI commands and their documentation.
+# @returns 0.
+cli.info() {
+    for key val in ${(kv)DEPS}; do
+        case $key in
+            (docs | env) continue ;;
+            (commands | git) 
+                __info $val 
+                continue
+                ;;
+            (*) continue ;;
+        esac
+    done
+    
+    return 0
+}
+
+__construct

@@ -2,13 +2,12 @@
 
 __construct() {
     declare -grA ROUTE=(
-        [modules]=./src/modules
-        [themes]=./src/themes
-        [files]=./src/files
-        [db]=./src/db
+        [src]=./src
+        [modules]=$ROUTE[src]/modules
+        [themes]=$ROUTE[src]/themes
+        [files]=$ROUTE[src]/files
+        [db]=./db
         [cli]=./utils/cli
-        [commands]=./utils/cli/commands
-        [docs]=./utils/cli/docs
     )
 
     declare -grA COLOR=(
