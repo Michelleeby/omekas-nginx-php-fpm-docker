@@ -11,9 +11,8 @@ src /
     --- modules / :/usr/share/nginx/app/modules
     --- files   / :/usr/share/nginx/app/files
 config /
-    --- omekas-db.ini:/usr/share/nginx/omekas/config/database.ini
-    --- omekas.config.php:/usr/share/nginx/omekas/local.config.php
-    --- php-fpm.conf:/usr/local/etc/php-fpm.d/omekas.conf
+    --- nginx.app.conf:/etc/nginx/conf.d/app.conf
+    --- php-fpm.conf:/usr/local/etc/php-fpm.d/app.conf
 utils /
     --- server.Dockerfile
     --- app.Dockerfile
@@ -46,4 +45,4 @@ Once thats all done, run `docker compose up` from the projects root and your pro
 Go to your [apps configured server name](https://github.com/Michelleeby/omekas-nginx-php-fpm-docker/blob/main/config/nginx.app.conf#L7) in browser and see if it works 🤓
 
 ## Check out the CLI framework 😄
-Typing the same few commands over and over? Check out the included [CLI](https://github.com/Michelleeby/omekas-nginx-php-fpm-docker/tree/main/utils/cli) framework and throw in your most used [commands](https://github.com/Michelleeby/omekas-nginx-php-fpm-docker/blob/main/utils/cli/commands).  
+Typing the same few commands over and over? Check out the included [CLI](https://github.com/Michelleeby/omekas-nginx-php-fpm-docker/tree/main/utils/cli) framework and throw in your most used [commands]().  
