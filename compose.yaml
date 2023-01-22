@@ -1,21 +1,27 @@
 services:
-  server: 
-    image: nginx:latest
+  web: 
+    build:
+      dockerfile: ./utils/web.Dockerfile
     restart: always
     ports:
       - 80:80
     networks:
       - frontend
-    volumes:
-      - ./app:/usr/share/nginx/omekas
-      - ./src/themes:/usr/share/nginx/omekas/themes
-      - ./src/modules:/usr/share/nginx/omekas/modules
-      - ./src/files:/usr/share/nginx/omekas/files
+    volumes: 
+      - files:/usr/share/nginx/omekas/files
     configs:
-      - source: nginx.app.conf
-        target: /etc/nginx/conf.d/omekas.conf
       - source: omekas-db.ini
         target: /usr/share/nginx/omekas/config/database.ini
+      - source: omekas.config.php
+        target: /usr/share/nginx/omekas/config/local.config.php
+      - source: module.config.php
+        target: /usr/share/nginx/omekas/application/config/module.config.php
+      - source: fastcgi_params
+        target: /etc/nginx/fastcgi_params
+      - source: nginx.app.conf
+        target: /etc/nginx/conf.d/omekas.conf
+      - source: nginx.conf
+        target: /etc/nginx/nginx.conf
 
   app:
     build: 
@@ -27,15 +33,16 @@ services:
       - frontend
       - backend
     volumes:
-      - ./app:/usr/share/nginx/omekas
-      - ./src/themes:/usr/share/nginx/omekas/themes
-      - ./src/modules:/usr/share/nginx/omekas/modules
-      - ./src/files:/usr/share/nginx/omekas/files
+      - files:/usr/share/nginx/omekas/files
     configs:
-      - source: php-fpm.conf
-        target: /usr/local/etc/php-fpm.d/omekas.conf
       - source: omekas-db.ini
         target: /usr/share/nginx/omekas/config/database.ini
+      - source: omekas.config.php
+        target: /usr/share/nginx/omekas/config/local.config.php
+      - source: module.config.php
+        target: /usr/share/nginx/omekas/application/config/module.config.php
+      - source: php-fpm.conf
+        target: /usr/local/etc/php-fpm.d/omekas.conf
 
   db:
     image: mariadb:latest
@@ -56,14 +63,21 @@ networks:
   frontend: {}
   backend: {}
 
+volumes:
+  files: {}
+
 configs:
   nginx.app.conf:
     file: ./config/nginx.app.conf
+  nginx.conf:
+    file: ./config/nginx.conf
+  fastcgi_params:
+    file: ./config/fastcgi_params
   php-fpm.conf:
     file: ./config/php-fpm.conf
   omekas-db.ini:
     file: ./config/omekas-db.ini
   omekas.config.php:
     file: ./config/omekas.config.php
-
-  
+  module.config.php:
+    file: ./config/module.config.php
