@@ -1,7 +1,7 @@
 # 👋 welcome to your docker nginx mariadb php-fpm app
 This is a framework for a local [Docker](https://www.docker.com/) web app that uses [Omeka S](https://omeka.org/s/) as an application base with [NGINX](https://www.nginx.com/), [PHP-FPM](https://php-fpm.org/), and [MariaDB](https://mariadb.org/) powering the frontend and backend networks. 
 ​
-## General framework and mounts
+## General app framework and container paths
 
 ```
 db  / :/var/lib/mysql
@@ -19,15 +19,15 @@ utils /
     --- cli /
 ```
 ​
-The `app` and `src` directories are dependendent on your web app of choice. For this example, I used [Omeka S](https://github.com/omeka/omeka-s/releases/tag/v4.0.0). Since Omeka S has a `/files`, `/themes`, and `/modules` directory, it made sense to mount those in my `src` directory. Files I want easy local access to, like themes or files, I find helpful to mount. 
+The `app` and `src` directories are dependendent on your web app of choice. For this example, I used [Omeka S](https://github.com/omeka/omeka-s/releases/tag/v4.0.0). Since Omeka S has a `/files` directory thats shared accross the PHP worker and the web server, I created a shared volume for this directory. 
 
-Configs are also mounted in their own local [`configs`](https://github.com/Michelleeby/omekas-nginx-php-fpm-docker/tree/main/config) directory. The build steps for the [`app`](https://github.com/Michelleeby/omekas-nginx-php-fpm-docker/blob/main/utils/app.Dockerfile) and the [`server`](https://github.com/Michelleeby/omekas-nginx-php-fpm-docker/blob/main/utils/server.Dockerfile) take care of including the various configs in the correct places.  
+Configs are also found in their own local [`configs`](https://github.com/Michelleeby/omekas-nginx-php-fpm-docker/tree/main/config) directory. These are then mounted in the appropriate place using the `config` directive in [`compose.yaml`](https://github.com/Michelleeby/omekas-nginx-php-fpm-docker/blob/main/compose.yaml).
 
 ## Basic usage
 
 Add your app code to the `app` directory. I've set `git` to ignore everything in the `app` directory except the `.gitignore` file itself. Remove or adjust the directory's `.gitignore` file as needed.
 
-Create the `src` directory if building off from a vendors app code. The `src` directory can then hold things unique to your app, like `/files`, `/themes`, and `/modules` in my Omeka S example. We can then mount each directory onto the applications respective `/files`, `/themes`, and `/modules` directories on the server. In this way we can seperate our app code from our vendor's app code. 
+Create the `src` directory if building off from a vendors app code. The `src` directory can then hold things unique to your app, like `/files`, `/themes`, and `/modules` in my Omeka S example. Then we can aggregate our sources during the build step. 
 
 Adjust [`compose.yaml`](https://github.com/Michelleeby/omekas-nginx-php-fpm-docker/blob/main/compose.yaml) and the build scripts, [`server.Dockerfile`](https://github.com/Michelleeby/omekas-nginx-php-fpm-docker/blob/main/utils/server.Dockerfile) and [`app.Dockerfile`](https://github.com/Michelleeby/omekas-nginx-php-fpm-docker/blob/main/utils/app.Dockerfile) as needed.
 
