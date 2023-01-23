@@ -8,11 +8,11 @@ RUN pecl install imagick && docker-php-ext-enable imagick
 RUN apt update && apt install -y libvips-dev
 RUN pecl install vips && docker-php-ext-enable vips
 # Add the Omeka S app to the container.
-ADD --chown=www-data:www-data ./app /usr/share/nginx/omekas
+ADD ./app /usr/share/nginx/omekas
 # Add the Omeka S app overrides to the container.
-ADD --chown=www-data:www-data ./src/application/src/File/Thumbnailer/Vips.php /usr/share/nginx/omekas/application/src/File/Thumbnailer/Vips.php
-ADD --chown=www-data:www-data ./src/application/src/Service/File/Thumbnailer/VipsFactory.php /usr/share/nginx/omekas/application/src/Service/File/Thumbnailer/VipsFactory.php
-ADD --chown=www-data:www-data ./src/modules /usr/share/nginx/omekas/modules
-ADD --chown=www-data:www-data ./src/themes /usr/share/nginx/omekas/themes
-# Add the local Omeka S app /files directory to the ontainer.
-ADD --chown=www-data:www-data ./src/files /usr/share/nginx/omekas/files
+ADD ./src/application/src/File/Thumbnailer/Vips.php /usr/share/nginx/omekas/application/src/File/Thumbnailer/Vips.php
+ADD ./src/application/src/Service/File/Thumbnailer/VipsFactory.php /usr/share/nginx/omekas/application/src/Service/File/Thumbnailer/VipsFactory.php
+ADD ./src/modules /usr/share/nginx/omekas/modules
+ADD ./src/themes /usr/share/nginx/omekas/themes
+# Update the ownership of the Omeka S to the shared user, www-data.
+RUN chown -R www-data:www-data /usr/share/nginx/omekas
