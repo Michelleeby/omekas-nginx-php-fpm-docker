@@ -9,6 +9,7 @@ services:
       - frontend
     volumes: 
       - files:/usr/share/nginx/omekas/files
+      - sideload:/usr/share/nginx/omekas/sideload
       - logs:/usr/share/nginx/omekas/logs
     configs:
       - source: omekas-db.ini
@@ -35,6 +36,7 @@ services:
       - backend
     volumes:
       - files:/usr/share/nginx/omekas/files
+      - sideload:/usr/share/nginx/omekas/sideload
       - logs:/usr/share/nginx/omekas/logs
     configs:
       - source: omekas-db.ini
@@ -60,13 +62,21 @@ services:
       MARIADB_DATABASE: ${MARIADB_DATABASE}
       MARIADB_USER: ${MARIADB_USER}
       MARIADB_PASSWORD: ${MARIADB_PASSWORD}
-    
+  
+  # One time file or data ingestion service.
+  # ingest:
+  #   build:
+  #     dockerfile: ./utils/ingest.Dockerfile
+  #   volumes:
+  #     - sideload:/usr/share/nginx/omekas/sideload
+
 networks:
   frontend: {}
   backend: {}
 
 volumes:
   files: {}
+  sideload: {}
   logs: {}
   db: {}
 
