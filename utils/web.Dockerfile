@@ -1,5 +1,5 @@
 FROM nginx:latest as nginx
-# Add the Omeka S app files to the container.
+# Add Omeka S app files to the container.
 ADD ./app /usr/share/nginx/omekas
 # Add Omeka S app overrides to the container.
 ADD ./src/modules /usr/share/nginx/omekas/modules
