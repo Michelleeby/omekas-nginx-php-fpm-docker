@@ -14,5 +14,5 @@ ADD ./src/application/src/File/Thumbnailer/Vips.php /usr/share/nginx/omekas/appl
 ADD ./src/application/src/Service/File/Thumbnailer/VipsFactory.php /usr/share/nginx/omekas/application/src/Service/File/Thumbnailer/VipsFactory.php
 ADD ./src/modules /usr/share/nginx/omekas/modules
 ADD ./src/themes /usr/share/nginx/omekas/themes
-# Update the ownership of Omeka S to the shared user, www-data.
+# Update the ownership of Omeka S to the app and web service user, www-data.
 RUN chown -R www-data:www-data /usr/share/nginx/omekas
