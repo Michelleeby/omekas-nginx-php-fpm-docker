@@ -15,15 +15,15 @@ return [
         'types' => [
             'large' => [
                 'constraint' => 800,
-                'options' => [ 'gravity' => 'center' ],
+                'options' => [ 'gravity' => 'low' ],
             ],
             'medium' => [
                 'constraint' => 400, 
-                'options' => [ 'gravity' => 'center' ], 
+                'options' => [ 'gravity' => 'low' ], 
             ],
             'square' => [
                 'constraint' => 200,
-                'options' => [ 'gravity' => 'center' ],
+                'options' => [ 'gravity' => 'low' ],
             ],
         ],
         'thumbnailer_options' => [

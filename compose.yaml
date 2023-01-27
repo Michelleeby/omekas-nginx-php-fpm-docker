@@ -14,7 +14,7 @@ services:
     configs:
       - source: omekas-db.ini
         target: /usr/share/nginx/omekas/config/database.ini
-      - source: omekas.config.php
+      - source: omekas.vips.config.php
         target: /usr/share/nginx/omekas/config/local.config.php
       - source: module.config.php
         target: /usr/share/nginx/omekas/application/config/module.config.php
@@ -41,7 +41,7 @@ services:
     configs:
       - source: omekas-db.ini
         target: /usr/share/nginx/omekas/config/database.ini
-      - source: omekas.config.php
+      - source: omekas.vips.config.php
         target: /usr/share/nginx/omekas/config/local.config.php
       - source: module.config.php
         target: /usr/share/nginx/omekas/application/config/module.config.php
@@ -91,7 +91,7 @@ configs:
     file: ./config/php-fpm.conf
   omekas-db.ini:
     file: ./config/omekas-db.ini
-  omekas.config.php:
-    file: ./config/omekas.config.php
+  omekas.vips.config.php:
+    file: ./config/omekas.vips.config.php
   module.config.php:
     file: ./config/module.config.php
