@@ -3,7 +3,7 @@ FROM php:8.2-fpm AS php
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN apt update && apt install -y libmagickwand-dev imagemagick
 RUN chmod +x /usr/local/bin/install-php-extensions && \
-    install-php-extensions mysqli pdo pdo_mysql imagick vips solr
+    install-php-extensions mysqli pdo pdo_mysql imagick vips solr xdebug
 # Add Omeka S app to the container.
 ADD ./app /usr/share/nginx/omekas
 # Add Omeka S app overrides to the container.
