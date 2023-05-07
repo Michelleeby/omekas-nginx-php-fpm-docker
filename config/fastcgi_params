@@ -25,4 +25,4 @@ fastcgi_param  SERVER_NAME        $server_name;
 fastcgi_param  REDIRECT_STATUS    200;
 
 # Omeka S specific
-fastcgi_param APPLICATION_ENV    development;
+fastcgi_param APPLICATION_ENV    production;

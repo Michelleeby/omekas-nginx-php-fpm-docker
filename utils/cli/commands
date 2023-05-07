@@ -15,11 +15,9 @@ info() {
     else
         for key val in ${(kv)DEPS}; do
             case $key in
-                (docs) continue ;;
-                (env | commands | git) 
+                (env | commands | git | docker) 
                     __info $val 
-                    continue
-                    ;;
+                    continue ;;
                 (*) continue ;;
             esac
         done

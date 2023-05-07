@@ -5,6 +5,7 @@ __construct() {
         [env]=$1/environment
         [commands]=$1/commands
         [git]=$1/git
+        [docker]=$1/docker
         [docs]=$1/docs
     )
 

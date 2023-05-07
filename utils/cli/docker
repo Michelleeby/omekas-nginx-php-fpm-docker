@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+__construct() {
+    return true
+}
+
+# @name up - Start the docker containers
+# @returns 0
+up() {
+    docker compose up
+    return 0
+}
+
+# @name down - Stop the docker containers
+# @returns 0
+down() {
+    docker compose down
+    return 0
+}

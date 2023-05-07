@@ -6,7 +6,7 @@ services:
     ports:
       - 80:80
     networks:
-      - frontend
+      - web
     volumes: 
       - files:/usr/share/nginx/omekas/files
       - sideload:/usr/share/nginx/omekas/sideload
@@ -32,8 +32,9 @@ services:
     ports:
       - 9000:9000
     networks:
-      - frontend
-      - backend
+      - web
+      - db
+      - solr
     volumes:
       - files:/usr/share/nginx/omekas/files
       - sideload:/usr/share/nginx/omekas/sideload
@@ -54,7 +55,7 @@ services:
     ports: 
       - 3306:3306
     networks:
-      - backend
+      - db
     volumes:
       - db:/var/lib/mysql
     environment: 
@@ -63,6 +64,19 @@ services:
       MARIADB_USER: ${MARIADB_USER}
       MARIADB_PASSWORD: ${MARIADB_PASSWORD}
   
+  solr:
+    image: solr:latest
+    restart: always
+    ports:
+      - 8983:8983
+    networks:
+      - solr
+    volumes:
+      - solr:/var/solr
+    command: 
+      - solr-precreate
+      - omekas
+
   # One time file or data ingestion service.
   # ingest:
   #   build:
@@ -71,14 +85,16 @@ services:
   #     - sideload:/usr/share/nginx/omekas/sideload
 
 networks:
-  frontend: {}
-  backend: {}
+  web: {}
+  db: {}
+  solr: {}
 
 volumes:
   files: {}
   sideload: {}
   logs: {}
   db: {}
+  solr: {}
 
 configs:
   nginx.app.conf:

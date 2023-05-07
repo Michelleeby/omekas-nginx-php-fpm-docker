@@ -1,12 +1,9 @@
 FROM php:8.2-fpm AS php
-# Omeka S requires the PDO and PDO Mysql extensions.
-RUN docker-php-ext-install mysqli pdo pdo_mysql
-# ImageMagick is required for image processing.
+# Install the PHP extensions installer script and PHP extensions.
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN apt update && apt install -y libmagickwand-dev imagemagick
-RUN pecl install imagick && docker-php-ext-enable imagick
-# Optionally, install the vips extension for image processing.
-RUN apt update && apt install -y libvips-dev
-RUN pecl install vips && docker-php-ext-enable vips
+RUN chmod +x /usr/local/bin/install-php-extensions && \
+    install-php-extensions mysqli pdo pdo_mysql imagick vips solr
 # Add Omeka S app to the container.
 ADD ./app /usr/share/nginx/omekas
 # Add Omeka S app overrides to the container.
