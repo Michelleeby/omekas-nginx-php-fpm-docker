@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "Xdebug Omeka S",
+            "type": "php",
+            "request": "launch",
+            "port": 9003,
+            "pathMappings": {
+                "/usr/share/nginx/omekas/": "${workspaceRoot}/app/",
+                "/usr/share/nginx/omekas/themes/": "${workspaceRoot}/src/themes/",
+                "/usr/share/nginx/omekas/modules/": "${workspaceRoot}/src/modules/",
+                "/usr/share/nginx/omekas/application/src/File/Thumbnailer/Vips.php": "${workspaceRoot}/src/application/src/File/Thumbnailer/Vips.php",
+                "/usr/share/nginx/omekas/application/src/Service/File/Thumbnailer/VipsFactory.php": "${workspaceRoot}/src/application/src/Service/File/Thumbnailer/VipsFactory.php"
+            }
+        }
+    ]
+}

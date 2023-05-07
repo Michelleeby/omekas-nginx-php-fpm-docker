@@ -48,6 +48,12 @@ services:
         target: /usr/share/nginx/omekas/application/config/module.config.php
       - source: php-fpm.conf
         target: /usr/local/etc/php-fpm.d/omekas.conf
+      - source: xdebug.ini
+        target: /usr/local/etc/php/conf.d/docker-php-ext-xdebug-addons.ini
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - XDEBUG_MODE=develop,debug
 
   db:
     image: mariadb:latest
@@ -111,3 +117,6 @@ configs:
     file: ./config/omekas.vips.config.php
   module.config.php:
     file: ./config/module.config.php
+  xdebug.ini:
+    file: ./config/docker-php-ext-xdebug-addons.ini
+
